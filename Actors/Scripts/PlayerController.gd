@@ -3,9 +3,9 @@ extends ActorController
 onready var actor = owner
 
 export var GRAVITY = 20
-export var JUMP_IMPULSE = 11
+export var JUMP_IMPULSE = 12
 
-export var CONTROLLER_DEADZONE = 0.01
+export var CONTROLLER_DEADZONE = 0.0
 
 var current_speed = 0.0 setget set_current_speed,get_current_speed
 var current_acceleration = 0.0 setget set_current_acceleration,get_current_acceleration
