@@ -1,0 +1,24 @@
+[gd_resource type="SpatialMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://assets/textures/MetalPlate/metal_plate_metal_1k.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/MetalPlate/metal_plate_nor_gl_1k.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/MetalPlate/metal_plate_rough_1k.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/MetalPlate/metal_plate_spec_1k.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/MetalPlate/metal_plate_ao_1k.png" type="Texture" id=5]
+
+[resource]
+albedo_texture = ExtResource( 4 )
+metallic = 0.43
+metallic_texture = ExtResource( 1 )
+roughness_texture = ExtResource( 3 )
+normal_enabled = true
+normal_scale = 5.0
+normal_texture = ExtResource( 2 )
+ao_enabled = true
+ao_light_affect = 0.38
+ao_texture = ExtResource( 5 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0

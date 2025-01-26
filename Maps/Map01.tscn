@@ -1,0 +1,580 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/materials/RockyTerrain.tres" type="Material" id=1]
+[ext_resource path="res://Maps/map01-environment.tres" type="Environment" id=2]
+[ext_resource path="res://assets/materials/RiverRock.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/MetalPlate.tres" type="Material" id=4]
+[ext_resource path="res://interface/scenes/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Utils/scenes/SpawnPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Maps/scripts/Map.gd" type="Script" id=8]
+[ext_resource path="res://interface/scenes/Lobby.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/audio/kill-sound.wav" type="AudioStream" id=11]
+
+[sub_resource type="OccluderShapePolygon" id=2]
+polygon_points = PoolVector2Array( 73, -1, 73, 14, -73, 14, -73, -1 )
+hole_points = PoolVector2Array( -69, -1, -61, -1, -69, 9, -61, 9 )
+
+[sub_resource type="OccluderShapePolygon" id=3]
+polygon_points = PoolVector2Array( 73, -1, 73, 20, -73, 20, -73, -1 )
+hole_points = PoolVector2Array( -2, -1, 6, -1, -2, 9, 6, 9 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 96.5, 1, 104 )
+
+[node name="Game" type="Node"]
+script = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainHUD" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
+
+[node name="Lobby" parent="CanvasLayer" instance=ExtResource( 9 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.802548, 0.00880018, 0.596522, 0, 0.999891, -0.0147509, -0.596587, 0.0118383, 0.802461, 22.5046, 5.15264, 36.0232 )
+current = true
+far = 250.0
+
+[node name="Level" type="Node" parent="."]
+
+[node name="BasicStructure" type="Node" parent="Level"]
+
+[node name="Floor" type="CSGBox" parent="Level/BasicStructure"]
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 150.0
+depth = 150.0
+material = ExtResource( 1 )
+
+[node name="Wall" type="CSGBox" parent="Level/BasicStructure"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 74 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 146.0
+height = 50.0
+material = ExtResource( 3 )
+
+[node name="Wall2" type="CSGBox" parent="Level/BasicStructure"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -74, 26, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 150.0
+height = 50.0
+material = ExtResource( 3 )
+
+[node name="Wall3" type="CSGBox" parent="Level/BasicStructure"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 26, -74 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 146.0
+height = 50.0
+material = ExtResource( 3 )
+
+[node name="Wall4" type="CSGBox" parent="Level/BasicStructure"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 74, 26, -3.8147e-06 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 150.0
+height = 50.0
+material = ExtResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BasicStructure/Wall4" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.8147e-06, -22, 0 )
+operation = 2
+height = 6.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/BasicStructure/Wall4" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -40, -22, 0 )
+operation = 2
+height = 6.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CaveStructure" type="Node" parent="Level"]
+
+[node name="Corridor1" type="Spatial" parent="Level/CaveStructure"]
+
+[node name="CSGBox" type="CSGBox" parent="Level/CaveStructure/Corridor1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/CaveStructure/Corridor1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 8, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/CaveStructure/Corridor1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, 4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Level/CaveStructure/Corridor1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, -4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="Level/CaveStructure/Corridor1" groups=["World"]]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 96, 14, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 6.0
+depth = 14.0
+material = ExtResource( 4 )
+
+[node name="Corridor2" type="Spatial" parent="Level/CaveStructure"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/CaveStructure/Corridor2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/CaveStructure/Corridor2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 8, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/CaveStructure/Corridor2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, 4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Level/CaveStructure/Corridor2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, -4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="Corridor3" type="Spatial" parent="Level/CaveStructure"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 40 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/CaveStructure/Corridor3" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/CaveStructure/Corridor3" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 8, 0 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/CaveStructure/Corridor3" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, 4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Level/CaveStructure/Corridor3" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 85, 4, -4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 34.0
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="Level/CaveStructure/Corridor3" groups=["World"]]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 94, 15, 1 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 8.0
+depth = 12.0
+material = ExtResource( 4 )
+
+[node name="Room1" type="Spatial" parent="Level/CaveStructure"]
+
+[node name="CSGBox" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 20 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 50.0
+depth = 50.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0, 15 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 40.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 164, 11, 20 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 20.0
+depth = 50.0
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 129, 11, -4 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 20.0
+depth = 68.0
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 139, 11, 44 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 20.0
+depth = 48.0
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 11, 19 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 20.0
+depth = 32.0
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 22, 20 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 50.0
+depth = 50.0
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="Level/CaveStructure/Room1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 22, 15 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 20.0
+depth = 40.0
+material = ExtResource( 4 )
+
+[node name="BuildingStructure" type="Node" parent="Level"]
+
+[node name="Building1" type="Spatial" parent="Level/BuildingStructure"]
+
+[node name="Wall1" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, -47 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 146.0
+height = 36.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building1/Wall1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -65, -13, 0 )
+operation = 2
+width = 8.0
+height = 10.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building1/Wall1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0 )
+operation = 2
+width = 8.0
+height = 10.0
+material = ExtResource( 4 )
+
+[node name="Floor1" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, -60.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 146.0
+depth = 25.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building1/Floor1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+operation = 2
+width = 11.0
+depth = 11.0
+material = ExtResource( 4 )
+
+[node name="Floor2" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, -60.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 146.0
+depth = 25.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building1/Floor2" groups=["World"]]
+operation = 2
+width = 114.0
+depth = 11.0
+material = ExtResource( 4 )
+
+[node name="Slide1" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.575, 7.515, -67.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 22.0
+depth = 11.0
+material = ExtResource( 4 )
+
+[node name="Slide3" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 0.422618, -0.906308, 0, 0.906308, 0.422618, 0, 0, 0, 1, -34.719, 25.579, -60.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 50.0
+depth = 11.0
+material = ExtResource( 4 )
+
+[node name="Slide4" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
+transform = Transform( 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 0, 0, 1, 34.719, 25.579, -60.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 50.0
+depth = 11.0
+material = ExtResource( 4 )
+
+[node name="Building2" type="Spatial" parent="Level/BuildingStructure"]
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8.5, -10 )
+use_collision = true
+width = 18.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8.5, 32 )
+use_collision = true
+width = 18.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 8.5, 11 )
+use_collision = true
+width = 40.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building2/CSGBox3" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3.5, 0 )
+operation = 2
+width = 8.0
+height = 8.0
+
+[node name="CSGBox4" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 8.5, 11 )
+use_collision = true
+width = 40.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building2/CSGBox4" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2.5, 0 )
+operation = 2
+width = 9.0
+height = 10.0
+
+[node name="CSGBox6" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 23.5, -10 )
+use_collision = true
+width = 18.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building2/CSGBox6" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0 )
+operation = 2
+width = 9.0
+height = 10.0
+
+[node name="CSGBox7" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 23.5, 32 )
+use_collision = true
+width = 18.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 23.5, 11 )
+use_collision = true
+width = 40.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox9" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 23.5, 11 )
+use_collision = true
+width = 40.0
+height = 15.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 15, -28.5 )
+use_collision = true
+width = 8.0
+depth = 35.0
+material = ExtResource( 4 )
+
+[node name="CSGBox10" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 30, 11 )
+use_collision = true
+width = 14.0
+depth = 40.0
+material = ExtResource( 4 )
+
+[node name="Slide4" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -1.84732e-08, -3.9616e-08, -1, -0.766045, 0.642787, -1.13133e-08, 0.642787, 0.766045, -4.2222e-08, -2, 4, 18 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+height = 24.0
+depth = 6.0
+
+[node name="CSGBox11" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 11.4835, 28.5394 )
+width = 14.0
+depth = 4.0
+
+[node name="CSGBox12" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 11.484, 8.785 )
+width = 35.5
+depth = 4.0
+
+[node name="CSGBox13" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 11.484, 1.071 )
+width = 20.0
+depth = 10.0
+
+[node name="Occluders" type="Node" parent="Level"]
+
+[node name="Occluder" type="Occluder" parent="Level/Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -46 )
+shape = SubResource( 2 )
+
+[node name="Occluder2" type="Occluder" parent="Level/Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -46 )
+shape = SubResource( 3 )
+
+[node name="Players" type="Node" parent="."]
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="SP1" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( 0.688013, 0, -0.725698, 0, 1, 0, 0.725698, 0, 0.688013, -53.89, 1, 53.373 )
+
+[node name="SP4" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( 0.0314978, 0, 0.999504, 0, 1, 0, -0.999504, 0, 0.0314978, 121.28, 1, 23.402 )
+
+[node name="SP2" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( -0.426047, 0, 0.904701, 0, 1, 0, -0.904701, 0, -0.426047, 40.013, 1, -21.413 )
+
+[node name="SP3" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( -0.187107, 0, -0.98234, 0, 1, 0, 0.98234, 0, -0.187107, -21.425, 16, -70.318 )
+
+[node name="SP10" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( 0.998538, 0, 0.0540613, 0, 1, 0, -0.0540613, 0, 0.998538, 3.397, 12.484, 27.952 )
+
+[node name="SP9" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( -0.0510807, 0, 0.998695, 0, 1, 0, -0.998695, 0, -0.0510807, 56.908, 38, -54.492 )
+
+[node name="SP6" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( -0.966295, 0, -0.257436, 0, 1, 0, 0.257436, 0, -0.966295, -52.464, 1, -55.48 )
+
+[node name="DeathArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14, 0 )
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="DeathArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
+shape = SubResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 2 )
+
+[node name="FadeInTween" type="Tween" parent="."]
+
+[node name="FadeOutTween" type="Tween" parent="."]
+
+[node name="MusicPlayerA" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+
+[node name="MusicPlayerB" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+
+[node name="KillSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.724388, 0.470296, -0.504066, 0, 0.731175, 0.68219, 0.689392, 0.494171, -0.529655, 0, 26.2461, -30.6581 )
+light_color = Color( 0.94902, 0.854902, 0.780392, 1 )
+light_energy = 2.93
+shadow_enabled = true
+
+[connection signal="_on_player_can_spawn" from="CanvasLayer/MainHUD" to="." method="_on_player_can_spawn"]
+[connection signal="on_exit_to_lobby" from="CanvasLayer/MainHUD" to="CanvasLayer/Lobby" method="_on_exit_to_lobby"]
+[connection signal="on_game_begin" from="CanvasLayer/Lobby" to="." method="_on_game_begin"]
+[connection signal="on_game_begin" from="CanvasLayer/Lobby" to="CanvasLayer/MainHUD" method="_on_game_begin"]
+[connection signal="body_entered" from="DeathArea" to="." method="_on_DeathArea_body_entered"]
+[connection signal="tween_completed" from="FadeOutTween" to="." method="_on_FadeOutTween_tween_completed"]
