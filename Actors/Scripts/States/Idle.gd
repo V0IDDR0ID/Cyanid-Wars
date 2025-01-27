@@ -1,6 +1,6 @@
 extends State
 
-export var H_ACCELERATION = 7
+export var H_ACCELERATION = 25
 
 func enter(_delta = 0.0):
 	controller.set_current_acceleration(H_ACCELERATION)

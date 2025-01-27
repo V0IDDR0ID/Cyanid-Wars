@@ -20,9 +20,9 @@ MIN_Y_RECOIL = -1.0
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, -4.91738e-07, 4.47035e-07, 1, -4.76837e-07, -1.19209e-07, 1.49012e-07, 1, 2.38419e-07, 0.197892, 0.245064 )
+collision_layer = 0
 monitoring = false
 monitorable = false
-collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 1.95793e-15, 0, -6.60022e-15, 1, 0, 0.707179, 0 )
@@ -44,6 +44,7 @@ stream = ExtResource( 4 )
 unit_size = 2.0
 max_db = 6.0
 max_distance = 30.0
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]
