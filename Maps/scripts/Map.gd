@@ -23,6 +23,8 @@ func _ready():
 	Network.connect("on_server_disconnected",self,"_on_server_disconnected")
 	main_hud.connect("on_exit_to_lobby",self,"_on_exit_to_lobby")
 	Scores.connect("on_kill_streak",main_hud,"_on_player_kill_streak")
+	if ProjectSettings.get_setting("rendering/quality/driver/driver_name") == "GLES2":
+		$WorldEnvironment.environment.dof_blur_near_enabled = false
 
 func create_players_intances():
 	var new_player

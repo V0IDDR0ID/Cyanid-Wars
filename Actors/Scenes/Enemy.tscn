@@ -12,16 +12,13 @@ height = 3.75
 [sub_resource type="SphereShape" id=3]
 radius = 0.943974
 
-[node name="Enemy" type="KinematicBody" groups=[
-"Enemy",
-]]
+[node name="Enemy" type="KinematicBody" groups=["Enemy"]]
 collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 2.275, 0 )
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="Body" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.905, 0 )

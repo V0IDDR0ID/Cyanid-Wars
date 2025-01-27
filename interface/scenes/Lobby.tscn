@@ -57,7 +57,7 @@ margin_right = 1820.0
 margin_bottom = 111.0
 
 [node name="Label" type="Label" parent="MainContainer/VBoxContainer/TitleContainer"]
-margin_right = 1664.0
+margin_right = 1673.0
 margin_bottom = 111.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
@@ -65,12 +65,12 @@ text = "Cyanid Wars"
 
 [node name="Label2" type="Label" parent="MainContainer/VBoxContainer/TitleContainer"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
-margin_left = 1668.0
+margin_left = 1677.0
 margin_right = 1820.0
 margin_bottom = 111.0
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
-text = "v 0.0.9 prelpha"
+text = "v 0.1.2 prelpha"
 valign = 2
 
 [node name="HSeparator" type="HSeparator" parent="MainContainer/VBoxContainer"]

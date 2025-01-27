@@ -54,7 +54,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.041,
 PULSE = true
 PULSE_RATE = 750
 RATE_OF_FIRE = 900
-MAGAZINE = 18
+MAGAZINE = 36
 DAMAGE = 8
 ADS_RANGE_MULTI = 1.5
 FALLOFF_RANGE = 60
@@ -124,7 +124,6 @@ material/0 = ExtResource( 9 )
 transform = Transform( 1.13552, 0.317167, -3.19744e-14, -0.424416, 0.848574, 5.14026e-09, 2.1817e-09, -4.36188e-09, 1, -0.216395, -0.498622, 3.94881e-07 )
 layers = 2
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="MeshInstance7" type="MeshInstance" parent="Model" index="6"]
 transform = Transform( 1, 1.65436e-24, -3.19744e-14, -3.30872e-24, 1, -1.38778e-17, 1.77636e-13, 1.38778e-17, 1, 2.41529, 0.361664, 1.43796e-06 )
@@ -142,13 +141,11 @@ material/0 = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8671, 0.158035, -2.98023e-08 )
 layers = 2
 mesh = SubResource( 9 )
-material/0 = null
 
 [node name="MeshInstance5" type="MeshInstance" parent="Model" index="9"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.966433, -0.138092, 7.45058e-09 )
 layers = 2
 mesh = SubResource( 10 )
-material/0 = null
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/draw = ExtResource( 3 )

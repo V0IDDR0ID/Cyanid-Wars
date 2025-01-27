@@ -227,7 +227,7 @@ func get_camera():
 
 func move(delta):
 	var movement = player_controller.calculate_movement(delta)
-	velocity = move_and_slide(movement,Vector3.UP)
+	velocity = move_and_slide(movement,Vector3.UP) * 1.2
 	return velocity
 
 func move_puppet(delta):

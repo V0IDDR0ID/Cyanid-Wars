@@ -57,7 +57,7 @@ height = 3.0
 extents = Vector3( 0.8, 1.5, 0.3 )
 
 [sub_resource type="BoxShape" id=7]
-extents = Vector3( 0.5795, 0.356077, 0.152413 )
+extents = Vector3( 0.58, 1.5, 0.152 )
 
 [sub_resource type="Animation" id=8]
 length = 0.3
@@ -145,7 +145,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 2.5, -0.8 )
 shape = SubResource( 6 )
 
 [node name="ButtCollision" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36479e-07, 1.06875, 1.33954 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 1.34 )
 shape = SubResource( 7 )
 
 [node name="Head" type="Spatial" parent="."]
@@ -311,5 +311,9 @@ __meta__ = {
 }
 
 [node name="HitMarker" parent="CanvasLayer" instance=ExtResource( 14 )]
+
+[node name="JumpRemember" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
 
 [connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]

@@ -133,7 +133,7 @@ func _on_player_killed(attacker_id,shot_type,victim_id):
 	if shot_type == Scores.HEADSHOT:
 		text = "[color=%s]%s[/color] killed [color=%s]%s[/color] with a headshot!" % [attacker_color,attacker_name,victim_color,victim_name]
 	elif shot_type == Scores.TAILSHOT:
-		text = "[color=%s]%s[/color] killed [color=%s]%s[/color] with a shot in the butt!" % [attacker_color,attacker_name,victim_color,victim_name]
+		text = "[color=%s]%s[/color] killed [color=%s]%s[/color] with a shot in the back!" % [attacker_color,attacker_name,victim_color,victim_name]
 	else:
 		text = "[color=%s]%s[/color] killed [color=%s]%s[/color]." % [attacker_color,attacker_name,victim_color,victim_name]
 	if text != "": chat_log.create_entry(text)

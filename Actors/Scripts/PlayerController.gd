@@ -3,7 +3,7 @@ extends ActorController
 onready var actor = owner
 
 export var GRAVITY = 20
-export var JUMP_IMPULSE = 12
+export var JUMP_IMPULSE = 14
 
 export var CONTROLLER_DEADZONE = 0.0
 

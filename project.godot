@@ -1294,3 +1294,7 @@ back={
 [mono]
 
 project/assembly_name="Capsule Wars"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
