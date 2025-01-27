@@ -313,7 +313,7 @@ material = ExtResource( 4 )
 [node name="Building1" type="Spatial" parent="Level/BuildingStructure"]
 
 [node name="Wall1" type="CSGBox" parent="Level/BuildingStructure/Building1" groups=["World"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, -47 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0972328, 18.7703, -48.5018 )
 use_collision = true
 collision_layer = 2
 collision_mask = 2
@@ -330,6 +330,13 @@ material = ExtResource( 4 )
 
 [node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building1/Wall1" groups=["World"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0 )
+operation = 2
+width = 8.0
+height = 10.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/BuildingStructure/Building1/Wall1" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2.31754, 69.021, -13.923, 0 )
 operation = 2
 width = 8.0
 height = 10.0
@@ -469,13 +476,6 @@ width = 40.0
 height = 15.0
 material = ExtResource( 4 )
 
-[node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 15, -28.5 )
-use_collision = true
-width = 8.0
-depth = 35.0
-material = ExtResource( 4 )
-
 [node name="CSGBox10" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 30, 11 )
 use_collision = true
@@ -493,18 +493,35 @@ depth = 6.0
 
 [node name="CSGBox11" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 11.4835, 28.5394 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
 width = 14.0
 depth = 4.0
 
 [node name="CSGBox12" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 11.484, 8.785 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
 width = 35.5
 depth = 4.0
 
 [node name="CSGBox13" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 11.484, 1.071 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
 width = 20.0
 depth = 10.0
+
+[node name="CSGBox14" type="CSGBox" parent="Level/BuildingStructure/Building2" groups=["World"]]
+transform = Transform( -9.11227e-08, 0, 2.08464, 0, 0.992651, 0, -1.08648, 0, -4.74916e-08, 2.01897, 14.9678, -28.3117 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 35.5
+depth = 4.0
 
 [node name="Occluders" type="Node" parent="Level"]
 
@@ -519,6 +536,9 @@ shape = SubResource( 3 )
 [node name="Players" type="Node" parent="."]
 
 [node name="SpawnPoints" type="Node" parent="."]
+
+[node name="SP5" parent="SpawnPoints" instance=ExtResource( 7 )]
+transform = Transform( -0.290312, 0, 2.90465e-08, 0, 0.606402, 0, -2.53799e-08, 0, -0.332254, -61.928, 37.6157, -60.5125 )
 
 [node name="SP1" parent="SpawnPoints" instance=ExtResource( 7 )]
 transform = Transform( 0.688013, 0, -0.725698, 0, 1, 0, 0.725698, 0, 0.688013, -53.89, 1, 53.373 )
