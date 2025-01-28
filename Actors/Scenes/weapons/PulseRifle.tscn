@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/animations/assault-idle.tres" type="Animation" id=1]
 [ext_resource path="res://assets/animations/assault-jump.tres" type="Animation" id=2]
@@ -49,8 +49,23 @@ size = Vector3( 0.3, 0.2, 0.2 )
 material = ExtResource( 10 )
 size = Vector3( 0.1, 0.4, 0.2 )
 
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/Muzzle/OmniLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [node name="PulseRifle" instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.041, -0.06, 0.6 )
+transform = Transform( 9.71934e-09, 0.815047, 0.579395, -1, 1.19249e-08, 0, -6.90922e-09, -0.579395, 0.815047, 0.326, -0.669, 3.537 )
 PULSE = true
 PULSE_RATE = 750
 RATE_OF_FIRE = 900
@@ -79,7 +94,7 @@ MAX_Y_FLINCH = 2.0
 fire_sound = ExtResource( 7 )
 
 [node name="Model" parent="." index="0"]
-transform = Transform( 0.485426, 0, 0, 0, 0.3, 2.91038e-11, 0, -2.91038e-11, 0.3, 0, 0, 0 )
+transform = Transform( 0.485426, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 8 )
 
@@ -94,6 +109,12 @@ transform = Transform( 2.06979, -9.34714e-23, -8.81073e-13, -9.92617e-24, 3.3333
 
 [node name="MuzzleFront" parent="Model/Muzzle" index="2"]
 transform = Transform( -5.42991e-07, -6.61744e-24, 1.0016, 4.34356e-24, 3.33333, -2.81241e-23, -3.33285, -6.17869e-25, -1.63181e-07, 0.0533296, 0.121767, 0.10946 )
+
+[node name="OmniLight" type="OmniLight" parent="Model/Muzzle" index="3"]
+light_color = Color( 1, 0.890196, 0, 1 )
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 10.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Model" index="1"]
 transform = Transform( 1, 1.65436e-24, -2.66454e-14, -3.30872e-24, 1, -1.38778e-17, 1.77636e-13, 1.38778e-17, 1, 0.78907, 0.091829, 5.96046e-07 )
@@ -148,6 +169,7 @@ layers = 2
 mesh = SubResource( 10 )
 
 [node name="AnimationPlayer" parent="." index="1"]
+anims/RESET = SubResource( 11 )
 anims/draw = ExtResource( 3 )
 anims/firing = ExtResource( 13 )
 anims/idle = ExtResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/materials/RockyTerrain.tres" type="Material" id=1]
 [ext_resource path="res://Maps/map01-environment.tres" type="Environment" id=2]
@@ -9,11 +9,18 @@
 [ext_resource path="res://Utils/scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Maps/scripts/Map.gd" type="Script" id=8]
 [ext_resource path="res://interface/scenes/Lobby.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/textures/wood_ao.png" type="Texture" id=10]
 [ext_resource path="res://assets/audio/kill-sound.wav" type="AudioStream" id=11]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 5 )
 uv1_scale = Vector3( 5, 5, 5 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 10 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="OccluderShapePolygon" id=2]
 polygon_points = PoolVector2Array( 6, -1, 6, 14, -73, 14, -73, -1 )
@@ -26,6 +33,14 @@ hole_points = PoolVector2Array( -14, -1, -6, -1, -14, 8, -6, 8 )
 [sub_resource type="OccluderShapePolygon" id=3]
 polygon_points = PoolVector2Array( 73, -1, 73, 20, -73, 20, -73, -1 )
 hole_points = PoolVector2Array( -2, -1, 6, -1, -2, 9, 6, 9 )
+
+[sub_resource type="OccluderShapePolygon" id=7]
+polygon_points = PoolVector2Array( 1, -1, 1, 29, -43, 29, -43, -1 )
+hole_points = PoolVector2Array( -20.5, -1, -11.5, -1, -20.5, 9, -11.5, 9 )
+
+[sub_resource type="OccluderShapePolygon" id=8]
+polygon_points = PoolVector2Array( 1, -1, 1, 29, -43, 29, -43, -1 )
+hole_points = PoolVector2Array( -35, -1, -27, -1, -35, 7, -27, 7 )
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 96.5, 1, 104 )
@@ -571,6 +586,39 @@ width = 4.0
 height = 8.0
 depth = 5.0
 
+[node name="Building4" type="Spatial" parent="Level/BuildingStructure"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 40 )
+
+[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 6 )
+
+[node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 6 )
+
+[node name="CSGBox3" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.5, 3, 5.5 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 6 )
+
 [node name="Occluders" type="Node" parent="Level"]
 
 [node name="Occluder" type="Occluder" parent="Level/Occluders"]
@@ -584,6 +632,14 @@ shape = SubResource( 5 )
 [node name="Occluder2" type="Occluder" parent="Level/Occluders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -47.5 )
 shape = SubResource( 3 )
+
+[node name="Occluder4" type="Occluder" parent="Level/Occluders"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 2, -10 )
+shape = SubResource( 7 )
+
+[node name="Occluder5" type="Occluder" parent="Level/Occluders"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 2, -10 )
+shape = SubResource( 8 )
 
 [node name="Players" type="Node" parent="."]
 

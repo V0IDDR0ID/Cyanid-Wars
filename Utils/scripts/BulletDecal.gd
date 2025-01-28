@@ -1,4 +1,7 @@
 extends Spatial
 
-func _on_Timer_timeout():
+
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()
