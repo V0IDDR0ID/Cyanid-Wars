@@ -122,5 +122,6 @@ focus_previous = NodePath("../CancelButton")
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Yes"
+
 [connection signal="pressed" from="CenterContainer/MarginContainer/Panel/MarginContainer/DialogContainer/ButtonsContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/Panel/MarginContainer/DialogContainer/ButtonsContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]

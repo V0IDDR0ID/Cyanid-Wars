@@ -29,9 +29,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Margin" type="MarginContainer" parent="Container"]
 margin_right = 1920.0
@@ -114,7 +111,7 @@ focus_next = NodePath("../ExitButton")
 focus_previous = NodePath("../../LobbyButton")
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
-text = "Settings"
+text = "SETTINGS_LBL"
 
 [node name="ExitButton" type="Button" parent="Container/Margin/Menu/HBoxContainer"]
 margin_left = 182.0
@@ -134,6 +131,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1920.0
 margin_bottom = 1080.0
+
 [connection signal="pressed" from="Container/Margin/Menu/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Container/Margin/Menu/LobbyButton" to="." method="_on_LobbyButton_pressed"]
 [connection signal="pressed" from="Container/Margin/Menu/HBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
