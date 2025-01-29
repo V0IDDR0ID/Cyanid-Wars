@@ -94,7 +94,7 @@ MAX_Y_FLINCH = 2.0
 fire_sound = ExtResource( 7 )
 
 [node name="Model" parent="." index="0"]
-transform = Transform( 0.485426, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+transform = Transform( 0.485426, 0, 0, 0, 0.3, 2.91038e-11, 0, -2.91038e-11, 0.3, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 8 )
 

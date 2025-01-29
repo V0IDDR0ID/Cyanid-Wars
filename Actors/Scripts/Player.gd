@@ -204,6 +204,8 @@ func _process(delta):
 	recover_health(delta)
 	if is_network_master():
 		hand.global_transform.origin = hand_loc.global_transform.origin
+		if Input.is_action_just_pressed("crouch"):
+			$PlayerController.crouch()
 
 func _physics_process(delta):
 	if is_network_master():

@@ -293,14 +293,12 @@ transform = Transform( 1, 1.42109e-14, -2.4869e-14, 0, 3.33333, -3.23376e-10, 7.
 
 [node name="MuzzleSide" parent="Model/Muzzle" index="1"]
 transform = Transform( 1, -3.1044e-09, 3.1044e-09, 0, 3.33333, 1.69407e-21, 2.84217e-13, 3.23376e-10, 3.33333, 0.273382, 0.0790767, 3.0509e-07 )
-modulate = Color( 0.333333, 1, 0, 1 )
 
 [node name="MuzzleFront" parent="Model/Muzzle" index="2"]
 transform = Transform( -5.42991e-07, 0, 1.0016, 1.63443e-17, 3.33333, 0, -3.33285, 8.71055e-17, -1.63181e-07, -0.0648676, 0.309775, 0.12539 )
-modulate = Color( 0.333333, 1, 0, 1 )
 
 [node name="OmniLight" type="OmniLight" parent="Model/Muzzle" index="3"]
-light_color = Color( 0.333333, 1, 0, 1 )
+light_color = Color( 1, 0.890196, 0, 1 )
 light_energy = 0.0
 shadow_enabled = true
 omni_range = 10.0

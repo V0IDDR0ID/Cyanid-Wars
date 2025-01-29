@@ -1,0 +1,27 @@
+keys,en,ru
+HOST_GAME_BTN,Host a game,Создать игру
+JOIN_GAME_BTN,Join а game,Присоединиться
+SETTINGS_LBL,Settings,Настройки
+LOG_LBL,Log,Лог
+SENSIVITY_LBL,Camera Sensivity,Чувствительность камеры
+GRAPHICS_LBL,Graphics,Графика
+VSYNC_LBL,Vsync,Вертикальная синхронизация
+CREDITS_BTN,Credits,Титры
+QUIT_BTN,Quit,Выйти
+NEWGAME_LBL,New game,Новая игра
+CANCEL_BTN,Cancel,Отмена
+HOST_BTN,Host,Создать
+JOIN_BTN,Join,Присоединиться
+YOUARE_MSG,You are,Ты
+IS_MSG," is ",
+READY_MSG,ready.,готов.
+NOREADY_MSG,no longer ready.,больше не готов.
+BEGIN,Begin,Начать
+WAITINGPLAYERS,Waiting players,Ожидаем игроков
+READY_LBL,Ready,Готов
+STARTING_MSG,Starting the game...,Начинаем игру...
+CREATING_MSG,Creating the server...,Создаем сервер...
+CONNECTING_MSG,Connecting to the host...,Подключаемся к хосту...
+COLOR_LBL,Color:,Цвет:
+PRIMARY_LBL,Primary weapon:,Основное оружие:
+SECONDARY_LBL,Secondary weapon:,Вторичное оружие:

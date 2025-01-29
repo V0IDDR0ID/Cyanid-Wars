@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Actors/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Actors/Scripts/PlayerController.gd" type="Script" id=2]
@@ -91,6 +91,109 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, -0.32 ), Vector3( 0, 0.03, -0.32 ), Vector3( 0, 0, -0.32 ) ]
 }
 
+[sub_resource type="Animation" id=14]
+length = 0.001
+
+[sub_resource type="Animation" id=13]
+resource_name = "crouch"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Mesh:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.5, 0.489 ), Vector3( 0, 1.75, 0.489 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Mesh:mesh:mid_height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3.0, 1.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:shape:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3.0, 1.5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2.5, 0.489 ), Vector3( 0, 1.75, 0.489 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HeadCollision:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 4.085, 0.489 ), Vector3( 0, 2.5, 0.489 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ButtCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Head:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.0869469, 4.45599, -0.412832 ), Vector3( -0.087, 3, -0.413 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CameraCollision:shape:extents")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.8, 1.5, 0.3 ), Vector3( 0.8, 0.5, 0.3 ) ]
+}
+
 [node name="Player" type="KinematicBody" groups=["Player"]]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 collision_mask = 3
@@ -99,12 +202,12 @@ HIT_COLOR = Color( 0.611765, 0.117647, 0.117647, 0.160784 )
 MELEE_COLOR = Color( 0.972549, 0.917647, 0.917647, 0.270588 )
 
 [node name="GroundCheck" type="RayCast" parent="."]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0.296149, 0 )
+transform = Transform( -1, 0, 3.89414e-07, 0, 1, 0, -3.89414e-07, 0, -1, 0, 0.296149, 0 )
 enabled = true
 collision_mask = 2
 
 [node name="Mesh" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.50113, 0.488986 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.5, 0.489 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 15 )
 
@@ -127,14 +230,14 @@ mesh = SubResource( 11 )
 material/0 = SubResource( 12 )
 
 [node name="Body" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 2.50379, 0.488986 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0.489 )
 shape = SubResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="HeadCollision" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.08547, 0.488986 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.085, 0.489 )
 shape = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
@@ -315,5 +418,9 @@ __meta__ = {
 [node name="JumpRemember" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 14 )
+anims/crouch = SubResource( 13 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]

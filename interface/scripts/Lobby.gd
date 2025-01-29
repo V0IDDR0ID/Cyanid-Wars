@@ -143,8 +143,8 @@ func deactivate_hud(value):
 	join_button.disabled = value
 	begin_button.disabled = value
 	exit_button.disabled = value
-	join_button.text = "Join"
-	host_button.text = "Host"
+	join_button.text = tr("JOIN_BTN")
+	host_button.text = tr("HOST_BTN")
 
 func append_log(text):
 	log_text.append_bbcode(text + LINE_BREAK)
@@ -175,9 +175,9 @@ func show_type_options(is_host):
 	final_separator.hide()
 	final_container.hide()
 	if is_host:
-		type_label.text = "Host a game"
+		type_label.text = tr("HOST_GAME_BTN")
 	else:
-		type_label.text = "Join a game"
+		type_label.text = tr("JOIN_GAME_BTN")
 	host_ip_container.visible = !is_host
 	upnp_button.visible = is_host
 	join_button.visible = !is_host
@@ -186,44 +186,44 @@ func show_type_options(is_host):
 remotesync func _on_client_ready(id,is_ready):
 	var string
 	if id == Network.self_data.id:
-		string = "You are "
+		string = tr("YOUARE_MSG")
 	else:
-		string = Network.connected_players[id].name + " is "
+		string = Network.connected_players[id].name + tr("IS_MSG")
 	if is_ready:
 		ready_players.append(id)
-		string = string + "ready."
+		string = string + tr("READY_MSG")
 	else:
 		ready_players.erase(id)
-		string = string + "no longer ready."
+		string = string + tr("NOREADY_MSG")
 	update_begin_button()
 	append_log(string)
 
 func is_all_players_ready():
 	if ready_players.size() == Network.connected_players.size() - 1:
 		begin_button.disabled = false
-		begin_button.text = "Begin"
+		begin_button.text = tr("BEGIN")
 	else:
 		begin_button.disabled = true
-		begin_button.text = "Waiting players"
+		begin_button.text = tr("WAITINGPLAYERS")
 
 func update_begin_button():
 	if game_type == CLIENT:
 		if is_player_ready:
-			begin_button.text = "Cancel"
+			begin_button.text = tr("CANCEL_BTN")
 		else:
-			begin_button.text = "Ready"
+			begin_button.text = tr("READY_LBL")
 	else:
 		if ready_players.size() == Network.connected_players.size() - 1:
 			begin_button.disabled = false
-			begin_button.text = "Begin"
+			begin_button.text = tr("BEGIN")
 		else:
 			begin_button.disabled = true
-			begin_button.text = "Waiting players"
+			begin_button.text = tr("WAITINGPLAYERS")
 		
 remotesync func begin_game():
 	is_begining = true
 	deactivate_hud(true)
-	append_log("Starting the game...")
+	append_log(tr("STARTING_MSG"))
 	if get_tree().is_network_server():
 		emit_signal("on_game_begin")
 
@@ -241,7 +241,7 @@ func _on_HostButton_pressed():
 	if can_join:
 		if port.empty(): port = Network.DEFAULT_PORT
 		host_button.pressed = false
-		append_log("Creating the server...")
+		append_log(tr("CREATING_MSG"))
 		yield(get_tree().create_timer(0.1),"timeout")
 		Network.create_server(id_text.text,port,upnp_button.pressed)
 		has_game = true
@@ -273,7 +273,7 @@ func _on_JoinButton_pressed():
 		buttons_disabled(true)
 		join_button.text = "Joining"
 		has_game = true
-		append_log("Connecting to the host...")
+		append_log(tr("CONNECTING_MSG"))
 		join_button.focus_neighbour_right = color_option.get_path()
 		cancel_button.focus_neighbour_right = color_option.get_path()
 		color_option.grab_focus()
@@ -287,9 +287,9 @@ func _on_BeginButton_pressed():
 		primary_option.disabled = is_player_ready
 		secondary_option.disabled = is_player_ready
 		if is_player_ready:
-			begin_button.text = "Cancel"
+			begin_button.text = tr("CANCEL_BTN")
 		else:
-			begin_button.text = "Ready"
+			begin_button.text = tr("READY")
 		rpc("_on_client_ready",Network.self_data.id,is_player_ready)
 
 func _on_player_connected(peer_id):
@@ -302,7 +302,7 @@ func _on_player_connected(peer_id):
 			text = "%s has connected." % player_info
 			if get_tree().is_network_server():
 				begin_button.disabled = true
-				begin_button.text = "Waiting players"
+				begin_button.text = tr("WAITINGPLAYERS")
 		append_log(text)
 
 func _on_player_disconnected(player):
@@ -313,8 +313,8 @@ func _on_player_disconnected(player):
 func _on_connection_failed():
 	append_log("Cannot connect to the server.")
 	buttons_disabled(false)
-	join_button.text = "Join"
-	host_button.text = "Host"
+	join_button.text = tr("JOIN_BTN")
+	host_button.text = tr("HOST_BTN")
 	begin_button.disabled = true
 
 func _on_server_disconnected():
@@ -385,8 +385,8 @@ func _on_CancelButton_pressed():
 			yield(get_tree().create_timer(0.1),"timeout")
 			Network.clear_mapped_ports()
 			append_log("Server terminated.")
-	join_button.text = "Join"
-	host_button.text = "Host"
+	join_button.text = tr("JOIN_BTN")
+	host_button.text = tr("HOST_BTN")
 	hide_containers(true)
 	get_tree().network_peer = null
 	host_game_button.grab_focus()

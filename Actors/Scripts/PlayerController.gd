@@ -15,6 +15,8 @@ var gravity_vector = Vector3.DOWN setget ,get_gravity_vector
 var on_sprint = false setget ,is_sprinting
 var was_sprinting = false
 
+var is_crouching : bool = false
+
 func set_current_speed(value):
 	current_speed = value
 
@@ -133,6 +135,14 @@ func fire(param):
 	elif was_sprinting and actor.is_on_floor() and not actor.get_is_ads():
 		was_sprinting = false
 		state_machine.set_state("Sprinting")
+
+func crouch():
+	if !is_crouching:
+		is_crouching = true
+		$"../AnimationPlayer".play("crouch")
+	else:
+		is_crouching = false
+		$"../AnimationPlayer".play_backwards("crouch")
 
 func melee(_param):
 	actor.rpc("melee_attack")

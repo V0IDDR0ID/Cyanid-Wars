@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/materials/RockyTerrain.tres" type="Material" id=1]
 [ext_resource path="res://Maps/map01-environment.tres" type="Environment" id=2]
@@ -9,18 +9,34 @@
 [ext_resource path="res://Utils/scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Maps/scripts/Map.gd" type="Script" id=8]
 [ext_resource path="res://interface/scenes/Lobby.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/textures/wood_ao.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/Wood/wood_ao.png" type="Texture" id=10]
 [ext_resource path="res://assets/audio/kill-sound.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/textures/Wood/wood_normal.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/WoodenBox/wooden_box_.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/WoodenBox/wooden_box_nor.png" type="Texture" id=14]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 10 )
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = ExtResource( 12 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 5 )
 uv1_scale = Vector3( 5, 5, 5 )
 
-[sub_resource type="SpatialMaterial" id=6]
-albedo_texture = ExtResource( 10 )
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 5 )
 uv1_scale = Vector3( 0.5, 0.5, 0.5 )
-uv1_triplanar = true
-uv1_triplanar_sharpness = 1.0
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_texture = ExtResource( 13 )
+normal_enabled = true
+normal_scale = 1.25
+normal_texture = ExtResource( 14 )
 
 [sub_resource type="OccluderShapePolygon" id=2]
 polygon_points = PoolVector2Array( 6, -1, 6, 14, -73, 14, -73, -1 )
@@ -42,6 +58,17 @@ hole_points = PoolVector2Array( -20.5, -1, -11.5, -1, -20.5, 9, -11.5, 9 )
 polygon_points = PoolVector2Array( 1, -1, 1, 29, -43, 29, -43, -1 )
 hole_points = PoolVector2Array( -35, -1, -27, -1, -35, 7, -27, 7 )
 
+[sub_resource type="OccluderShapePolygon" id=10]
+polygon_points = PoolVector2Array( 11, 1, 11, 31, -7, 1, -7, 31 )
+
+[sub_resource type="OccluderShapePolygon" id=9]
+polygon_points = PoolVector2Array( 11, 1, 11, 31, -7, 1, -7, 31 )
+hole_points = PoolVector2Array( 6.5, 16, -2.5, 16, -2.5, 26, 6.5, 26 )
+
+[sub_resource type="OccluderShapePolygon" id=14]
+polygon_points = PoolVector2Array( 19, 0, 19, 48, -11, 48, -11, -1 )
+hole_points = PoolVector2Array( -2, -1, 3, -1, 3, 5, -2, 5 )
+
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 96.5, 1, 104 )
 
@@ -56,7 +83,7 @@ visible = false
 [node name="Lobby" parent="CanvasLayer" instance=ExtResource( 9 )]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.802548, 0.00880018, 0.596522, 0, 0.999891, -0.0147509, -0.596587, 0.0118383, 0.802461, 22.5046, 5.15264, 36.0232 )
+transform = Transform( 0.819152, -0.40558, 0.40558, 0, 0.707107, 0.707107, -0.573577, -0.579228, 0.579228, 22.505, 60, 36.023 )
 current = true
 far = 250.0
 
@@ -563,7 +590,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 2
 width = 35.5
-depth = 4.0
+material = SubResource( 12 )
 
 [node name="Building3" type="Spatial" parent="Level/BuildingStructure"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, 45 )
@@ -578,6 +605,7 @@ material = SubResource( 4 )
 [node name="CSGSphere" type="CSGSphere" parent="Level/BuildingStructure/Building3/CSGSphere" groups=["World"]]
 operation = 2
 radius = 13.0
+material = SubResource( 4 )
 
 [node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building3/CSGSphere" groups=["World"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, 0 )
@@ -585,39 +613,339 @@ operation = 2
 width = 4.0
 height = 8.0
 depth = 5.0
+material = SubResource( 11 )
 
-[node name="Building4" type="Spatial" parent="Level/BuildingStructure"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 40 )
+[node name="Boxes" type="Spatial" parent="Level/BuildingStructure"]
 
-[node name="CSGBox" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
+[node name="Box1" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 3, -17 )
 use_collision = true
 collision_layer = 2
 collision_mask = 2
 width = 4.0
 height = 4.0
 depth = 4.0
-material = SubResource( 6 )
+material = SubResource( 13 )
 
-[node name="CSGBox2" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16 )
+[node name="Box18" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 3, 14 )
 use_collision = true
 collision_layer = 2
 collision_mask = 2
 width = 4.0
 height = 4.0
 depth = 4.0
-material = SubResource( 6 )
+material = SubResource( 13 )
 
-[node name="CSGBox3" type="CSGBox" parent="Level/BuildingStructure/Building4" groups=["World"]]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.5, 3, 5.5 )
+[node name="Box24" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 3, 18 )
 use_collision = true
 collision_layer = 2
 collision_mask = 2
 width = 4.0
 height = 4.0
 depth = 4.0
-material = SubResource( 6 )
+material = SubResource( 13 )
+
+[node name="Box29" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 3, 10 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box30" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 7, 14 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box31" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 7, 18 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box2" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 3, -2 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box3" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 3, -2 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box4" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 7, -2 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box5" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 3, -17 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box6" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 7, -17 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box7" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 3, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box8" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 3, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box9" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 3, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box10" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 3, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box11" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 3, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box12" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 3, 57 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box13" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 3, 57 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box32" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 3, 61 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box33" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 3, 61 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box14" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 7, 57 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box15" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 7, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box16" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 7, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box17" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 7, 57 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box19" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 11, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box20" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 11, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box21" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 11, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box22" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 11, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box23" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 11, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box25" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 15, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box26" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 15, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box27" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 15, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
+
+[node name="Box28" type="CSGBox" parent="Level/BuildingStructure/Boxes" groups=["World"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 15, 53 )
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 13 )
 
 [node name="Occluders" type="Node" parent="Level"]
 
@@ -640,6 +968,18 @@ shape = SubResource( 7 )
 [node name="Occluder5" type="Occluder" parent="Level/Occluders"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 2, -10 )
 shape = SubResource( 8 )
+
+[node name="Occluder6" type="Occluder" parent="Level/Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33 )
+shape = SubResource( 10 )
+
+[node name="Occluder7" type="Occluder" parent="Level/Occluders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11 )
+shape = SubResource( 9 )
+
+[node name="Occluder8" type="Occluder" parent="Level/Occluders"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 72, 2, 0 )
+shape = SubResource( 14 )
 
 [node name="Players" type="Node" parent="."]
 
